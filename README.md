@@ -37,11 +37,11 @@ sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt update
-sudo apt install ansible
+sudo apt install ansible=5.10.0-1ppa~focal
 
 # Step 4 - Finally install python and various packages needed for remote connections and other activities
 sudo apt install python3 python3-pip
-pip3 install pywinrm requests msrest msrestazure azure-cli
+pip3 install pywinrm requests msrest msrestazure azure-cli pypsrp 
 pip3 install -r https://raw.githubusercontent.com/ansible-collections/azure/v1.14.0/requirements-azure.txt
 ```
 
