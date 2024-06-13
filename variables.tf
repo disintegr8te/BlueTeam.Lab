@@ -8,6 +8,11 @@
 ############################################################
 # Defualt config for various settings such as LAN segments, location of domain config file etc.
 ############################################################
+variable "additional_public_ip" {
+  description = "Additional public IP for firewall rules"
+  default     = "127.0.0.1"  # Replace with your additional IP address
+}
+
 
 variable "domain_config_file" {
     description = "Path to the primary configuration file for DC"
