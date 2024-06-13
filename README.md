@@ -53,7 +53,7 @@ Once all the [prerequisites](#Prerequisites) are installed, perform the followin
 az login
 
 # Clone Repository and move to BlueTeam.Lab folder
-git clone https://github.com/op7ic/BlueTeam.Lab.git && cd BlueTeam.Lab
+git clone https://github.com/disintegr8te/BlueTeam.Lab.git && cd BlueTeam.Lab
 
 # Initialize Terraform and begin planning
 terraform init && terraform plan
