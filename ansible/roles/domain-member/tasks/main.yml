@@ -60,7 +60,7 @@
     # We already have WinRM at this point but invoking ConfigureRemotingForAnsible just in case. All this will do is to setup FW rules and create SSL cert. 
     - name: Download ConfigureRemotingForAnsible
       win_get_url:
-        url: "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+        url: "https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
         dest: C:\windows\temp\ConfigureRemotingForAnsible.ps1
       tags: base 
     
