@@ -11,7 +11,7 @@
 ############################################################
 
 # FQDN of Windows domain
-domain_fqdn: blueteam.lab
+domain_fqdn: disintegr8te.lab
 
 # DC hostname
 dc_name: PDC-1
