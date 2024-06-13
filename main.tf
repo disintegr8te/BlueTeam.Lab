@@ -138,7 +138,7 @@ resource "azurerm_network_security_group" "windows" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
   
@@ -150,7 +150,7 @@ resource "azurerm_network_security_group" "windows" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "5985"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
 
@@ -162,7 +162,7 @@ resource "azurerm_network_security_group" "windows" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "5986"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
 
@@ -174,7 +174,7 @@ resource "azurerm_network_security_group" "windows" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "445"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
 }
@@ -193,7 +193,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
   # Ports defined: https://documentation.wazuh.com/current/getting-started/architecture.html
@@ -205,7 +205,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "1514-1516"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
 
@@ -217,7 +217,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "9200"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
   
@@ -229,7 +229,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "55000"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
   
@@ -241,7 +241,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "9300-9400"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
 
@@ -253,7 +253,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "TCP"
     source_port_range          = "*"
     destination_port_range     = "443"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
   
@@ -265,7 +265,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "8000"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
 
@@ -277,7 +277,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "10000"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
   
@@ -289,7 +289,7 @@ resource "azurerm_network_security_group" "wazuh" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "9999"
-    source_address_prefix      = "${local.public_ip}/32"
+    source_address_prefixes    = ["${local.public_ip}/32", "${var.additional_public_ip}/32"]
     destination_address_prefix = "*"
   }
 
