@@ -51,7 +51,7 @@ data "http" "public_IP" {
 # Reference variables from main variables.tf file
 # If you prefer to add different IP as source, change 'public_ip' variable to match
 locals {
-  public_ip = jsondecode(data.http.public_IP.body).ip
+  public_ip = jsondecode(data.http.public_IP.response_body).ip
   config_file = yamldecode(file(var.domain_config_file))
 }
 
