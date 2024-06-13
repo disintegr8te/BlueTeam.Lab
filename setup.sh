@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script ensures the latest versions of Azure CLI, Terraform, and Ansible are installed without creating redundant entries or duplicates.
+# This script ensures specific versions of Azure CLI, Terraform, and Ansible are installed without creating redundant entries or duplicates.
 
 echo "Starting the setup of prerequisites for BlueTeam.Lab..."
 
@@ -31,14 +31,16 @@ install_terraform() {
     sudo apt-get update && sudo apt-get install -y terraform
 }
 
-# Function to install Ansible and Azure collections
+# Function to install a specific version of Ansible and additional Python packages
 install_ansible() {
     echo "Setting up Python environment for Ansible..."
     python3 -m venv ~/ansible-env
     source ~/ansible-env/bin/activate
     pip install --upgrade pip
-    pip install ansible  # Install the latest available version of Ansible
+    pip install ansible==2.12.*  # Install Ansible 2.12 to ensure compatibility
     ansible-galaxy collection install azure.azcollection  # Install the latest available Azure collection
+    # Install additional Python packages required for Azure and Windows management
+    pip install pywinrm requests msrest msrestazure azure-cli packaging
     deactivate
 }
 
