@@ -346,14 +346,48 @@
       tags: fleetserver    
   
 
-    - name: Create connection point via FleetCTL
-      shell: "{{ fleetdm_install_path }}/fleetctl config set --address https://localhost:{{webserver_port}} --tls-skip-verify"
-      tags: fleetserver
-    
-    - name: Add Fleet User
-      # add user
+- name: Check if Fleet Server is already setup
+  command: ls /opt/fleetdm/fleetbin
+  register: fleet_setup_check
+  failed_when: fleet_setup_check.rc != 0 and 'No such file or directory' not in fleet_setup_check.stderr
+  changed_when: false
+  ignore_errors: true
+  tags: fleetserver
+
+- block:
+    - name: Set up Fleet Server if not already done
       shell: "{{ fleetdm_install_path }}/fleetctl setup --email '{{ config_file.Fleetdm.username }}' --name '{{ config_file.Fleetdm.account_name }}' --org-name '{{ config_file.Fleetdm.org }}' --password '{{config_file.Fleetdm.password }}' "
+      when: fleet_setup_check.rc != 0
       tags: fleetserver
+
+    - name: Add Fleet User
+      shell: "{{ fleetdm_install_path }}/fleetctl setup --email '{{ config_file.Fleetdm.username }}' --name '{{ config_file.Fleetdm.account_name }}' --org-name '{{ config_file.Fleetdm.org }}' --password '{{config_file.Fleetdm.password }}' "
+      when: fleet_setup_check.rc != 0
+      tags: fleetserver
+
+    - name: Login and Add Fleet config
+      shell: "{{ fleetdm_install_path }}/fleetctl login --email '{{ config_file.Fleetdm.username }}' --password '{{config_file.Fleetdm.password }}' "
+      when: fleet_setup_check.rc != 0
+      tags: fleetserver      
+
+    - name: Apply additional config via FleetCTL
+      shell: "{{ fleetdm_install_path }}/fleetctl apply -f {{ fleetdm_install_path }}/config/fleetctl-config.yml"
+      when: fleet_setup_check.rc != 0
+      tags: fleetserver
+  rescue:
+    - include_tasks: 
+        file: roles/fleetserver/tasks/main.yml
+        apply:
+          tags:
+            - fleetserver
+      when: include_fleetdm_install_counter|int < include_max|default(10)|int
+      tags: fleetserver
+      
+    - fail:
+        msg: Failed to install fleetserver after 10 attempts
+      when: include_fleetdm_install_counter|int >= include_max|default(10)|int
+      tags: fleetserver
+
       
     - name: Login and Add Fleet config
       # Login for session
